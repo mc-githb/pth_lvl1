@@ -2,7 +2,7 @@ from typing import NamedTuple, Optional, List
 import random
 
 class State(NamedTuple):
-    board: List[str] = list('.' * 9)
+    board: List[str]
     player: str = 'X'
     quit: bool = False
     draw: bool = False
@@ -25,7 +25,7 @@ def get_answer(question: str, options: str) -> str:
 def format_board(board: List[str]) -> str:
     ''' Get formatted board '''
 
-    board = [count if number == '.' else number for count, number in enumerate(board, 1)]
+    board = [idx if value == '.' else value for idx, value in enumerate(board, 1)]
 
     return '\n'.join([ 
         f'{board[0]}|{board[1]}|{board[2]}',
@@ -53,7 +53,7 @@ def get_move(state: State, human: str) -> State:
         if state.board[move_number - 1] in 'XO':
             return state._replace(error=f'Cell "{move}" is already taken!')
     else:
-        pc_options = [str(count) for count, position in enumerate(state.board, 1) if position == '.']
+        pc_options = [str(idx) for idx, value in enumerate(state.board, 1) if value == '.']
         pc_choice = random.choice(pc_options)  
         move_number = int(pc_choice)  
 

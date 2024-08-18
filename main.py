@@ -14,7 +14,7 @@ def main() -> None:
     else:
         player = ge.get_answer('Pick a side: X or O? ', 'XO')
 
-        state = ge.State()
+        state = ge.State(board=list('.' * 9))
 
         if player == 'O':
             state = state._replace(player='O')
@@ -38,11 +38,6 @@ def main() -> None:
                 print('It is a draw!')
                 break
         
-        # board = state.board
-        # board = list('.' * 9)
-        # state = state._replace(board=board)
-        ge.reset_state(state)
-        state = ''
         main()
 
 if __name__ == '__main__':
